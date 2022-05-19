@@ -235,8 +235,10 @@ public class ADD_NEW_PRODUCT extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
         jLabel6.setText("How to use ?");
 
+        jLabel7.setForeground(new java.awt.Color(51, 255, 255));
         jLabel7.setText("1. Select table row for Update operation.");
 
+        jLabel8.setForeground(new java.awt.Color(51, 255, 255));
         jLabel8.setText("2. Select table row for Delete operation.");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -260,8 +262,10 @@ public class ADD_NEW_PRODUCT extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(67, 67, 67)
+                                .addComponent(jLabel8)))
                         .addContainerGap(60, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -280,9 +284,10 @@ public class ADD_NEW_PRODUCT extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addGap(4, 4, 4)
-                .addComponent(jLabel8))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addGap(20, 20, 20))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 450));

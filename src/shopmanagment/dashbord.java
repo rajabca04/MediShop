@@ -39,7 +39,6 @@ public class dashbord extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem24 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -49,11 +48,8 @@ public class dashbord extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -124,10 +120,12 @@ public class dashbord extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem4);
 
-        jMenuItem5.setText("PURCHASE CHALLAN");
-        jMenu2.add(jMenuItem5);
-
         jMenuItem6.setText("PURCHASE ORDER");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
 
         jMenuItem24.setText("ADD NEW PRODUCT");
@@ -151,12 +149,27 @@ public class dashbord extends javax.swing.JFrame {
         jMenu3.add(jMenuItem7);
 
         jMenuItem8.setText("SALE REPLACEMENT");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem8);
 
         jMenuItem9.setText("PURCHASE RETURN");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
         jMenuItem10.setText("PURCHASE REPLACEMENT");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem10);
 
         jMenuBar1.add(jMenu3);
@@ -164,23 +177,24 @@ public class dashbord extends javax.swing.JFrame {
         jMenu4.setText("REPORT");
 
         jMenuItem11.setText("EXPRY/BRAKGE REPORT");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem11);
-
-        jMenuItem12.setText("DAILY REPORT");
-        jMenu4.add(jMenuItem12);
 
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("QUERIES");
 
         jMenuItem13.setText("PRODUCT QUERIY");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem13);
-
-        jMenuItem14.setText("CUSTOMER QUERIY");
-        jMenu5.add(jMenuItem14);
-
-        jMenuItem15.setText("SUPPLIER QUERIY");
-        jMenu5.add(jMenuItem15);
 
         jMenuItem16.setText("RATE QUERIY");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
@@ -191,16 +205,31 @@ public class dashbord extends javax.swing.JFrame {
         jMenu5.add(jMenuItem16);
 
         jMenuItem17.setText("STOCK QUERIY");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem17);
 
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("ACCOUNT");
 
-        jMenuItem18.setText("BANK ACCOUNT");
+        jMenuItem18.setText("BANK ACCOUNT DETAIL");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem18);
 
         jMenuItem19.setText("PARTY PAYMENT DETAIL");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem19);
 
         jMenuBar1.add(jMenu6);
@@ -238,14 +267,14 @@ public class dashbord extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 173, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(624, 624, 624))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(483, Short.MAX_VALUE)
+                .addContainerGap(425, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(127, 127, 127))
             .addGroup(layout.createSequentialGroup()
@@ -275,12 +304,14 @@ public class dashbord extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        purchaseentry pe = new purchaseentry();
-        jDesktopPane1.add(pe).setVisible(true);
+       purchaseentry pe = new purchaseentry();
+       jDesktopPane1.add(pe).setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
         // TODO add your handling code here:
+        Rate_query rq = new Rate_query();
+        jDesktopPane1.add(rq).setVisible(true);
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
@@ -293,7 +324,7 @@ public class dashbord extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
-        
+
         ADD_NEW_PRODUCT ANP = new ADD_NEW_PRODUCT();
         jDesktopPane1.add(ANP).setVisible(true);
     }//GEN-LAST:event_jMenuItem24ActionPerformed
@@ -303,6 +334,62 @@ public class dashbord extends javax.swing.JFrame {
         sale_return_customer src = new sale_return_customer();
         jDesktopPane1.add(src).setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        purchaseOrder po = new purchaseOrder();
+        jDesktopPane1.add(po).setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        sales_replacement sr = new sales_replacement();
+        jDesktopPane1.add(sr).setVisible(true);
+        
+        
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+
+       Purchase_return pr = new Purchase_return();
+       jDesktopPane1.add(pr).setVisible(true);
+       
+
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        Parchase_replacement pr = new Parchase_replacement();
+        jDesktopPane1.add(pr).setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        
+        ExpiryBreakageReport ebr = new ExpiryBreakageReport();
+        jDesktopPane1.add(ebr).setVisible(true);
+                
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        
+        BankAccountDetail bad = new BankAccountDetail();
+        jDesktopPane1.add(bad).setVisible(true);
+
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+
+        Product_query pq = new Product_query();
+        jDesktopPane1.add(pq).setVisible(true);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        Party_payment_details ppd = new Party_payment_details();
+        jDesktopPane1.add(ppd).setVisible(true);
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+
+        Stock_query sq = new Stock_query();
+        jDesktopPane1.add(sq).setVisible(true);
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,10 +441,7 @@ public class dashbord extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
@@ -369,7 +453,6 @@ public class dashbord extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
