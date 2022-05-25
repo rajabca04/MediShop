@@ -4,6 +4,13 @@
  */
 package shopmanagment;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+
 /**
  *
  * @author rajab
@@ -15,8 +22,37 @@ public class BankAccountDetail extends javax.swing.JInternalFrame {
      */
     public BankAccountDetail() {
         initComponents();
+        getBankDetail();
     }
 
+    public void getBankDetail() {
+        Connection conn;
+
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.getDataVector().removeAllElements();
+            
+            String query = "select * from SM_BANK_ACCOUNT_DETAIL";
+
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system",
+                    "Hello@12345");
+
+            Statement st;
+            st = conn.createStatement();
+
+            ResultSet res = st.executeQuery(query);
+
+            while (res.next()) {
+                String row[] = { res.getString("Account_no") + "",res.getString("name"), res.getString("ifsc_code"),res.getString("dl_no"),res.getString("A_date"),res.getString("bank_name"),res.getString("branch"),res.getString("address")};
+                model.addRow(row);
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,6 +143,11 @@ public class BankAccountDetail extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jButton2.setText("SAVE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("DELETE");
 
@@ -212,6 +253,48 @@ public class BankAccountDetail extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+       String NAME = jTextField1.getText();
+        String ADDRESS= jTextField2.getText();
+        String DL_NO = jTextField3.getText();
+        String ACCOUNT = jTextField4.getText();
+        String IFSC_CODE = jTextField5.getText();
+        String DATE = jTextField7.getText();
+        String BANK_NAME = jTextField6.getText();
+        String BRANCH = jTextField8.getText();
+       
+        
+
+        Connection conn;
+        try {
+
+            String query = "insert into SM_BANK_ACCOUNT_DETAIL values(1,'" + NAME + "','" + IFSC_CODE + "','"
+            + DL_NO + "','" + DATE + "','" + BANK_NAME + "','" + BRANCH + "','" + ADDRESS + "')";
+
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system",
+                "Hello@12345");
+
+            Statement st;
+            st = conn.createStatement();
+
+            int res = st.executeUpdate(query);
+            if (res > 0) {
+                JOptionPane.showMessageDialog(this, "Inserted..");
+                getBankDetail();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Not inserted..");
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

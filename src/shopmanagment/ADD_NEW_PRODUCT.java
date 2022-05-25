@@ -46,13 +46,13 @@ public class ADD_NEW_PRODUCT extends javax.swing.JInternalFrame {
 
             ResultSet res = st.executeQuery(query);
 
-            while (res.next()) {
-                String row[] = { res.getInt(1) + "", res.getString(2), res.getString(3), res.getString(4),
+             while (res.next()) {
+                 String row[] = { res.getInt(1)+"", res.getString("PRODUCT_NAME")+"", res.getString(3), res.getString(4),
                         res.getString(5), res.getString(6) };
-                model.addRow(row);
+                 model.addRow(row);
 
-            }
-
+             }
+            
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -281,16 +281,16 @@ public class ADD_NEW_PRODUCT extends javax.swing.JInternalFrame {
                             .addComponent(jButton4)
                             .addComponent(jButton5)))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
-                .addGap(20, 20, 20))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 450));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1150, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

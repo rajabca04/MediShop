@@ -6,9 +6,11 @@ package shopmanagment;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.jar.Attributes.Name;
-
+import javax.swing.table.TableModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,6 +29,62 @@ public class wholsaleinvoice extends javax.swing.JInternalFrame {
      */
     public wholsaleinvoice() {
         initComponents();
+        countInvoice();
+        getInvoice();
+    }
+    public void getInvoice() {
+        Connection conn;
+
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.getDataVector().removeAllElements();
+            
+            String query = "select * from SM_WHOLSALE_INVOICE";
+
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system",
+                    "Hello@12345");
+
+            Statement st;
+            st = conn.createStatement();
+
+            ResultSet res = st.executeQuery(query);
+
+            while (res.next()) {
+                String row[] = { res.getString("PRODUCT+_NAME") + "",res.getString("BATCH_NO"), res.getString("mrp"),res.getString("price"),res.getString("quentity"),res.getString("free_quentity"),res.getString("discount"),res.getString("amount")};
+                model.addRow(row);
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+    }
+
+    public void countInvoice() {
+        Connection conn;
+
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.getDataVector().removeAllElements();
+            
+            String query = "select count(*) from SM_WHOLSALE_INVOICE";
+
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system",
+                    "Hello@12345");
+
+            Statement st;
+            st = conn.createStatement();
+
+            ResultSet res = st.executeQuery(query);
+            
+            jTextField10.setText(res.toString());
+           
+            conn.close();
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
     }
 
     /**
@@ -151,6 +209,7 @@ public class wholsaleinvoice extends javax.swing.JInternalFrame {
         });
 
         jButton1.setText("NEXT");
+        jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -158,6 +217,11 @@ public class wholsaleinvoice extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("SEARCH");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("BATCH NO");
 
@@ -168,6 +232,11 @@ public class wholsaleinvoice extends javax.swing.JInternalFrame {
         jLabel16.setText("M.R.P");
 
         jButton3.setText("SEARCH");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel17.setText("SALL RATE");
 
@@ -402,6 +471,7 @@ public class wholsaleinvoice extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
         invoice_bill b = new invoice_bill();
           //dashbord d=new dashbord();
         d.jDesktopPane1.add(b).setVisible(true);
@@ -431,7 +501,7 @@ public class wholsaleinvoice extends javax.swing.JInternalFrame {
         Connection conn;
 
         try {
-            String query = "insert into SM_WHOLSALE_INVOICE values('1','1','" + DL_NO + "','" + NAME + "','" + address+ "','" + mobile_no + "','" + Product_name + "','" + batch_no + "','" + quantity + "','" + free_quantity + "','" + MRP + "','" + date + "','" + cash_credit + "','" + rate + "','" + discount + "','" + amount + "','" + tax + "')";
+            String query = "insert into SM_WHOLSALE_INVOICE values(1,'" + DL_NO + "','" + NAME + "','" + address+ "','" + mobile_no + "','" + Product_name + "','" + batch_no + "'," + quantity + "," + free_quantity + "," + MRP + ",'" + date + "','" +cash_credit + "'," + rate + "," + discount + "," + amount + "," + tax + ")";
 
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE",
@@ -450,6 +520,68 @@ public class wholsaleinvoice extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Search by DL_no.
+        Connection conn;
+           try {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.getDataVector().removeAllElements();
+            
+            String query = "select * from SM_ADDPARTY where DL_NO='"+jTextField1.getText()+"'";
+
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "Hello@12345");
+
+            Statement st;
+            st = conn.createStatement();
+
+            ResultSet res = st.executeQuery(query);
+
+            while (res.next()) {
+                jTextField1.setText(res.getString("DL_NO"));
+//                jTextField2.setText(res.getString("PARTY_NAME"));
+                jTextField3.setText(res.getString("PARTY_NAME"));
+                jTextField4.setText(res.getString("ADDRESS"));
+                jTextField5.setText(res.getString("MOBILE_NO"));
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // Search by product.
+        
+        Connection conn;
+           try {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.getDataVector().removeAllElements();
+            
+            String query = "select * from SM_ADDPRODUCT where PRODUCT_NAME='"+jTextField6.getText()+"'";
+
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "Hello@12345");
+
+            Statement st;
+            st = conn.createStatement();
+
+            ResultSet res = st.executeQuery(query);
+
+            while (res.next()) {
+                jTextField6.setText(res.getString("PRODUCT_NAME"));
+                jTextField13.setText(res.getString("BATCH_NO"));
+                jComboBox1.setSelectedItem(res.getString("TAX"));
+                
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
