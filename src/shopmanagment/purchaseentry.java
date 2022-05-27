@@ -22,8 +22,39 @@ public class purchaseentry extends javax.swing.JInternalFrame {
      */
     public purchaseentry() {
         initComponents();
+        getPurchaseEntry();
     }
 
+    public void getPurchaseEntry() {
+        Connection conn;
+
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.getDataVector().removeAllElements();
+
+            String query = "select * from SM_PURCHASE_ENTRY";
+
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system",
+                    "Hello@12345");
+
+            Statement st;
+            st = conn.createStatement();
+
+            ResultSet res = st.executeQuery(query);
+
+             while (res.next()) {
+                String row[] = { res.getInt(1)+"", res.getString(2)+"", res.getString(3), res.getString(4),
+                res.getString(5), res.getString(6), res.getString(7), res.getString(8), res.getString(9), res.getString(10), res.getString(11), res.getString(12), res.getString(13), res.getString(14), res.getString(15), res.getString(16) };
+                 model.addRow(row);
+
+             }
+            
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,9 +113,6 @@ public class purchaseentry extends javax.swing.JInternalFrame {
         jLabel22 = new javax.swing.JLabel();
         jTextField20 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
-        jLabel23 = new javax.swing.JLabel();
-        jTextField21 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -166,15 +194,6 @@ public class purchaseentry extends javax.swing.JInternalFrame {
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
-            }
-        });
-
-        jLabel23.setText("TOTLE ITEMS = ");
-
-        jButton4.setText("NEXT");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
             }
         });
 
@@ -292,14 +311,7 @@ public class purchaseentry extends javax.swing.JInternalFrame {
                                         .addComponent(jButton3))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4))
-                            .addComponent(jScrollPane1))))
+                        .addComponent(jScrollPane1)))
                 .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
@@ -395,13 +407,8 @@ public class purchaseentry extends javax.swing.JInternalFrame {
                             .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -507,11 +514,11 @@ public class purchaseentry extends javax.swing.JInternalFrame {
 
         Connection conn;
         try {
-            String query = "insert into SM_PURCHASE_ENTRY values('" + dl_no + "','" + name + "','" + code + "','"
+            String query = "insert into SM_PURCHASE_ENTRY values(1,'" + dl_no + "','" + name + "','" + code + "','"
                     + address + "','" + mobile + "','" + gst + "','" + product_name + "','" + batch_no + "','"
                     + quantity + "','" + mrp + "','" + entry_name + "','" + bill_no + "','" + cash_credit + "','" + date
                     + "','" + bill_amount + "','" + freight + "','" + free_quantity + "','" + tax + "','"
-                    + purchase_rate + "','" + mfg + "',,'" + discount + "','" + exp + "')";
+                    + purchase_rate + "','" + mfg + "','" + discount + "','" + exp + "')";
 
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE",
@@ -521,6 +528,7 @@ public class purchaseentry extends javax.swing.JInternalFrame {
             int res = st.executeUpdate(query);
             if (res > 0) {
                 JOptionPane.showMessageDialog(this, "Success...");
+                getPurchaseEntry();
             } else {
                 JOptionPane.showMessageDialog(this, "Unuccess...");
             }
@@ -536,7 +544,6 @@ public class purchaseentry extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -554,7 +561,6 @@ public class purchaseentry extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -578,7 +584,6 @@ public class purchaseentry extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;

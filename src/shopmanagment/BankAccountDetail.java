@@ -4,6 +4,7 @@
  */
 package shopmanagment;
 
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -84,10 +85,9 @@ public class BankAccountDetail extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
+        setClosable(true);
         setTitle("BANK ACCOUNT DETAIL");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -120,6 +120,8 @@ public class BankAccountDetail extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("BRANCH");
 
+        jTable1.setBackground(new java.awt.Color(0, 51, 51));
+        jTable1.setForeground(new java.awt.Color(255, 255, 51));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -137,7 +139,7 @@ public class BankAccountDetail extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "S.No", "NAME", "ADDRESS", "DL_NO", "DATE", "ACCOUNT NO", "IFSC CODE", "BANK NAME", "BRANCH"
+                "ACCOUNT_NO", "NAME", "ADDRESS", "DL_NO", "DATE", "ACCOUNT NO", "IFSC CODE", "BANK NAME", "BRANCH"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -149,18 +151,19 @@ public class BankAccountDetail extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setText("DELETE");
-
-        jButton4.setText("UPDATE");
-
         jButton5.setText("PRINT LIST");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,13 +200,9 @@ public class BankAccountDetail extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jButton2)
-                .addGap(118, 118, 118)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(86, 86, 86)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
-                .addGap(70, 70, 70))
+                .addGap(60, 60, 60))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,8 +242,6 @@ public class BankAccountDetail extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
                     .addComponent(jButton5))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
@@ -296,12 +293,28 @@ public class BankAccountDetail extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        // Printing table....
+        try {
+            boolean complete = jTable1.print();
+            if (complete) {
+                JOptionPane.showMessageDialog(this, "Printing complite..");
+
+            } else {
+                JOptionPane.showMessageDialog(this,"Their are some error...");
+
+            }
+        } catch (PrinterException pe) {
+            System.err.println(pe.toString());
+
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

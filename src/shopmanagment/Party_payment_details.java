@@ -3,7 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package shopmanagment;
-
+import java.awt.print.PrinterException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
 /**
  *
  * @author rajab
@@ -15,8 +21,37 @@ public class Party_payment_details extends javax.swing.JInternalFrame {
      */
     public Party_payment_details() {
         initComponents();
+        getPartyPayment();
+        
     }
+ public void getPartyPayment() {
+        Connection conn;
 
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.getDataVector().removeAllElements();
+            
+            String query = "select * from SM_PARTY_PAYMENT";
+
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system",
+                    "Hello@12345");
+
+            Statement st;
+            st = conn.createStatement();
+
+            ResultSet res = st.executeQuery(query);
+
+            while (res.next()) {
+                String row[] = {res.getString("id"),res.getString("NAME"), res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString("P_DATE"),res.getString("CHQUE_NO"),res.getString(9)};
+                model.addRow(row);
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,12 +81,11 @@ public class Party_payment_details extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
 
+        setClosable(true);
         setTitle("PARTY PAYMENT DETAILS");
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
@@ -100,20 +134,26 @@ public class Party_payment_details extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "S.No", "NAME", "ADDRESS", "DL_NO", "BILL NO", "PAYMENT MODE", "AMOUNT", "CHQUE NO", "DATE"
+                "S.No", "NAME", "ADDRESS", "DL_NO", "BILL NO", "AMOUNT", "DATE", "CHQUE NO", "PAYMENT_MODE"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setText("SAVE");
-
-        jButton3.setText("DELETE");
-
-        jButton4.setText("UPDATE");
-
         jButton5.setText("PRINT LIST");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CHQUE", "CASH" }));
+
+        jButton2.setText("SAVE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,15 +193,11 @@ public class Party_payment_details extends javax.swing.JInternalFrame {
                     .addComponent(jTextField6)
                     .addComponent(jTextField8)
                     .addComponent(jComboBox1, 0, 196, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(36, 36, 36)
                 .addComponent(jButton2)
-                .addGap(118, 118, 118)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(86, 86, 86)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addGap(70, 70, 70))
         );
@@ -201,10 +237,8 @@ public class Party_payment_details extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(jButton5)
+                    .addComponent(jButton2))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
@@ -222,12 +256,64 @@ public class Party_payment_details extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        String NAME = jTextField1.getText();
+        String ADDRESS= jTextField2.getText();
+        String DL_NO = jTextField3.getText();
+        String Bill_no = jTextField7.getText();
+        String amount = jTextField5.getText();
+        String chque_no = jTextField6.getText();
+        String date = jTextField8.getText();
+        String Payment_mode = jComboBox1.getSelectedItem().toString();
+
+        Connection conn;
+        try {
+
+            String query = "insert into SM_PARTY_PAYMENT values(1,'" + NAME + "','" + ADDRESS + "','"
+            + DL_NO + "','" + Bill_no + "','" + amount + "','" + chque_no + "','" + date + "','"+ Payment_mode+"')";
+
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system",
+                "Hello@12345");
+
+            Statement st;
+            st = conn.createStatement();
+
+            int res = st.executeUpdate(query);
+            if (res > 0) {
+                JOptionPane.showMessageDialog(this, "Inserted..");
+                getPartyPayment();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Not inserted..");
+            }
+
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try {
+            boolean complete = jTable1.print();
+            if(complete){
+                JOptionPane.showMessageDialog(this, "Print complite..");
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"their are some error..");
+            }
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

@@ -4,6 +4,10 @@
  */
 package shopmanagment;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +21,39 @@ public class Login1 extends javax.swing.JFrame {
     public Login1() {
         initComponents();
     }
-
+public boolean verify()
+  
+  { 
+      Connection con;
+      String USER_ID=jTextField1.getText();
+        String PASSWORD= jPasswordField1.getText();
+         try{
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            con = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system",
+                    "Hello@12345");
+             Statement st=con.createStatement();
+            
+            String query="select USER_ID,PASSWORD FROM login";
+            ResultSet rs =st.executeQuery(query);
+           while(rs.next())
+           {
+           if(rs.getString(1).equals(USER_ID)&& rs.getString(2).equals(PASSWORD))
+           {
+            dispose();
+            dashbord.main(null);
+           }
+            else{   
+            JOptionPane.showMessageDialog(this,"USER ID AND PASSWORD IS INNCORRECT");
+            }
+           }
+             
+                 }catch(Exception e){
+            JOptionPane.showMessageDialog(this, e);
+           
+            
+            } 
+  return false;
+  }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,6 +77,7 @@ public class Login1 extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -103,30 +140,44 @@ public class Login1 extends javax.swing.JFrame {
         jLabel6.setText("B. Use registor password as password...");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, -1, -1));
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 51, 0));
+        jLabel7.setText("Forgate password...");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, -1, -1));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        dispose();
+        Registoration_form.main(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        ForgatePassword.main(null);
+    }//GEN-LAST:event_jLabel7MouseClicked
 
-        String user_name = jTextField1.getText();
-        String password = jPasswordField1.getText();
-        
-        if(user_name.contains("admin") && password.contains("password")){
-            dispose();
-        dashbord.main(null);
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "please try again....");
-        }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+         verify();
+
+//        String user_name = jTextField1.getText();
+//        String password = jPasswordField1.getText();
+//        
+//        if(user_name.contains("admin") && password.contains("password")){
+//            dispose();
+//        dashbord.main(null);
+//        }
+//        else{
+//            JOptionPane.showMessageDialog(this, "please try again....");
+//        }
                 
-        
     }// GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -177,6 +228,7 @@ public class Login1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;

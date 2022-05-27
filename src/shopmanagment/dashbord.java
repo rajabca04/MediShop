@@ -40,6 +40,7 @@ public class dashbord extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem24 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -57,6 +58,10 @@ public class dashbord extends javax.swing.JFrame {
         jMenu8 = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem22 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MADICAL SHOP MANAGEMENT SYSTEM");
@@ -123,6 +128,14 @@ public class dashbord extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem24);
+
+        jMenuItem5.setText("PURCHASE ORDER");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
 
         jMenuBar1.add(jMenu2);
 
@@ -235,7 +248,35 @@ public class dashbord extends javax.swing.JFrame {
         });
         jMenu9.add(jMenuItem22);
 
+        jMenuItem14.setText("Data backup");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem14);
+
         jMenuBar1.add(jMenu9);
+
+        jMenu7.setText("ADMINITRATOR");
+
+        jMenuItem6.setText("ADD USER");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem6);
+
+        jMenuItem12.setText("CHANGE USER PASSWORD");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem12);
+
+        jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
 
@@ -271,7 +312,7 @@ public class dashbord extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
           
-        wholsaleinvoice w = new wholsaleinvoice(this);
+        WholsaleInvoice1 w = new WholsaleInvoice1();
         jDesktopPane1.add(w).setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -360,6 +401,26 @@ public class dashbord extends javax.swing.JFrame {
         jDesktopPane1.add(sq).setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        purchaseOrder po = new purchaseOrder();
+        jDesktopPane1.add(po).setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        Registoration_form.main(null);
+        
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        CHANGEUSERPASSWORD cp = new CHANGEUSERPASSWORD();
+        jDesktopPane1.add(cp).setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        Databackup db = new Databackup();
+        jDesktopPane1.add(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+ 
     /**
      * @param args the command line arguments
      */
@@ -403,13 +464,16 @@ public class dashbord extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
@@ -419,13 +483,12 @@ public class dashbord extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    private wholsaleinvoice wholsaleinvoice() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
